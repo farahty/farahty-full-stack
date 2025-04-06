@@ -6,7 +6,7 @@ export default function Home() {
           Welcome to{" "}
           <span className="text-green-500">
             {process.env.NEXT_PUBLIC_SITE_NAME}
-          </span>{" "}
+          </span>
           App
         </h1>
         <p className="text-lg text-center sm:text-left">
