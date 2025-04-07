@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+"use client";
+import { cn, fetchCallback } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,13 +8,76 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { Form } from "./ui/form";
+import TextField from "./fields/text-field";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { authClient } from "@/lib/auth/auth-client";
+import { useState } from "react";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+const signupSchema = z
+  .object({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters long"),
+    confirmPassword: z
+      .string()
+      .min(6, "Confirm Password must be at least 6 characters long"),
+  })
+  .refine(({ password, confirmPassword }) => password === confirmPassword, {
+    path: ["confirmPassword"],
+    message: "password do not matched",
+  });
+
+type SignupForm = z.infer<typeof signupSchema>;
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  const form = useForm<SignupForm>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data: SignupForm) => {
+    try {
+      setError(null);
+      const results = await authClient.signUp.email(
+        {
+          email: data.email,
+          password: data.password,
+          name: data.name,
+        },
+        fetchCallback(setLoading)
+      );
+      if (results.error) {
+        setError(results.error.message!);
+      }
+
+      if (results.data?.token) {
+        router.push("/admin");
+      }
+    } catch (error) {
+      setError("An error occurred while signing up.");
+      console.log("Signup error:", error);
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -22,40 +86,54 @@ export function SignupForm({
           <CardDescription>Signup and register to your account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="grid gap-6">
-              <div className="grid gap-3">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" type="text" placeholder="your name" required />
-              </div>
-
-              <div className="grid gap-3">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="grid gap-6">
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertTitle>SignUp Error</AlertTitle>
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+                <TextField
+                  control={form.control}
+                  name="name"
+                  label="Name"
+                  placeholder="your name"
+                  disabled={loading}
                 />
-              </div>
-              <div className="grid gap-3">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input id="password" type="password" required />
-              </div>
+                <TextField
+                  control={form.control}
+                  name="email"
+                  label="Email"
+                  type="email"
+                  placeholder="your email"
+                  disabled={loading}
+                />
+                <TextField
+                  control={form.control}
+                  name="password"
+                  label="Password"
+                  type="password"
+                  placeholder="your password"
+                  disabled={loading}
+                />
+                <TextField
+                  control={form.control}
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  placeholder="confirm password"
+                  disabled={loading}
+                />
 
-              <div className="grid gap-3">
-                <div className="flex items-center">
-                  <Label htmlFor="retype-password">Retype Password</Label>
-                </div>
-                <Input id="retype-password" type="password" required />
+                <Button type="submit" className="w-full" loading={loading}>
+                  Register
+                </Button>
               </div>
-              <Button type="submit" className="w-full">
-                Login
-              </Button>
-            </div>
-          </form>
+            </form>
+          </Form>
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
