@@ -7,6 +7,10 @@ import * as schema from "../db/schema";
 import { sendVerificationEmail } from "../email";
 
 export const auth = betterAuth({
+  appName: process.env.APP_NAME!,
+  advanced: {
+    cookiePrefix: process.env.AUTH_COOKIE_NAME!,
+  },
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,
@@ -17,7 +21,6 @@ export const auth = betterAuth({
   },
   emailVerification: {
     sendOnSignUp: true,
-
     sendVerificationEmail: async ({ url, user }) => {
       await sendVerificationEmail({
         email: user.email,
@@ -36,6 +39,7 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
+
   session: {
     strategy: "jwt",
     maxAge: 60 * 60 * 24 * 30, // 30 days
