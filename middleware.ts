@@ -5,8 +5,10 @@ import { NextRequest, NextResponse } from "next/server";
 type Session = typeof auth.$Infer.Session;
 
 export async function middleware(request: NextRequest) {
+  const origin = process.env.BETTER_AUTH_URL ?? request.nextUrl.origin;
+
   const { data: session } = await betterFetch<Session>(
-    "/api/auth/get-session",
+    `${origin}/api/auth/get-session`,
     {
       baseURL: request.nextUrl.origin,
       headers: {
