@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { AlertCircle } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -167,9 +168,12 @@ export function LoginForm({
                 </div>
                 <div className="text-center text-sm">
                   Don&apos;t have an account?{" "}
-                  <a href="/sign-up" className="underline underline-offset-4">
+                  <Link
+                    href="/sign-up"
+                    className="underline underline-offset-4"
+                  >
                     Sign up
-                  </a>
+                  </Link>
                 </div>
               </div>
             </form>
