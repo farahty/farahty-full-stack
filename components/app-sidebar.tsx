@@ -27,6 +27,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useLocale } from "next-intl";
+import { getDirection } from "@/i18n/routing";
 
 const data = {
   navMain: [
@@ -148,8 +150,13 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const locale = useLocale();
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar
+      variant="inset"
+      {...props}
+      side={getDirection(locale) === "ltr" ? "left" : "right"}
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

@@ -1,0 +1,18 @@
+{
+  "Common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "delete": "Delete",
+    "save": "Save",
+    "edit": "Edit",
+    "add": "Add",
+    "update": "Update",
+    "search": "Search",
+    "clear": "Clear",
+    "select": "Select",
+    "deselect": "Deselect"
+  }
+}
