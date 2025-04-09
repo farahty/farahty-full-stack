@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,6 +7,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "./ui/breadcrumb";
+import { useLocale } from "next-intl";
+import { isRTL } from "@/i18n/routing";
 
 type AppBreadcrumbProps = {
   items: Array<{
@@ -17,19 +20,22 @@ type AppBreadcrumbProps = {
 export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
   const roots = items.slice(0, items.length - 1);
   const last = items[items.length - 1];
+  const locale = useLocale();
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
         {roots.map((item, index) => (
-          <BreadcrumbItem key={index} className="hidden md:block">
-            <BreadcrumbLink href={item.href ?? "#"}>
-              {item.label}
-            </BreadcrumbLink>
-            {index < roots.length - 1 && (
-              <BreadcrumbSeparator className="hidden md:block" />
-            )}
-          </BreadcrumbItem>
+          <>
+            <BreadcrumbItem key={index} className="hidden md:block">
+              <BreadcrumbLink href={item.href ?? "#"}>
+                {item.label}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator
+              className={cn("hidden md:block", { "rotate-180": isRTL(locale) })}
+            />
+          </>
         ))}
         <BreadcrumbItem>
           <BreadcrumbPage>{last.label}</BreadcrumbPage>
