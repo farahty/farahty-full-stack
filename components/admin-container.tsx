@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Separator } from "./ui/separator";

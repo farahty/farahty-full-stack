@@ -18,6 +18,7 @@ export default function Home() {
           This is a simple example of a Next.js application using Tailwind CSS
           and a custom font. You can customize the styles and content as needed.
         </p>
+        <p>{t("freeze")}</p>
       </main>
     </div>
   );

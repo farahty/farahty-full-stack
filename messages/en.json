@@ -1,0 +1,18 @@
+{
+  "add": "Add To Cart Farahty",
+  "cancel": "Cancel",
+  "clear": "Clear",
+  "close": "Close",
+  "delete": "Delete",
+  "deselect": "Deselect",
+  "edit": "Edit",
+  "greeting": "Welcome to {{name}} App",
+  "no": "No",
+  "ok": "OK",
+  "save": "Save",
+  "search": "Search",
+  "select": "Select",
+  "update": "Update",
+  "yes": "Yes",
+  "freeze": "Freeze"
+}
