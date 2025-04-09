@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+import NextTopLoader from "nextjs-toploader";
 import { getDirection, routing } from "@/i18n/routing";
 import "../globals.css";
 import AuthProvider from "@/components/auth-provider";
@@ -46,6 +47,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <NextTopLoader color="var(--color-primary)" showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
