@@ -71,6 +71,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.21.2
         version: 8.21.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@tolgee/react':
+        specifier: ^6.2.4
+        version: 6.2.4(react@19.1.0)
       better-auth:
         specifier: ^1.2.5
         version: 1.2.5(typescript@5.8.3)
@@ -1519,6 +1522,17 @@ packages:
   '@tanstack/table-core@8.21.2':
     resolution: {integrity: sha512-uvXk/U4cBiFMxt+p9/G7yUWI/UbHYbyghLCjlpWZ3mLeIZiUBSKcUnw9UnKkdRz7Z/N4UBuFLWQdJCjUe7HjvA==}
     engines: {node: '>=12'}
+
+  '@tolgee/core@6.2.4':
+    resolution: {integrity: sha512-k9s2SOSNSFkT9VISeuh9ZtBvSO0hiSzXu3jdgRmgM6JcWQonfdynprdNWPkPO75WtjaXcGRb9NFb7+mD7cHiaQ==}
+
+  '@tolgee/react@6.2.4':
+    resolution: {integrity: sha512-6iigshkDzz9NYjcW4rGHyodZZWTFxkV/9UCLPIWjjxmOSj5vjlg7WPltBqAfvzkc1uXnY96xGiT7KbpfNmOQFg==}
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.1 || ^18.1.0 || ^19
+
+  '@tolgee/web@6.2.4':
+    resolution: {integrity: sha512-uDHawHxN76VovJ1lUD6exaUUwgOQDWUpFYF2hQiChg4+OpHnUHbxXyH/MOYllDq5Vab9VWkZPYIqzq7lMnncHg==}
 
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
@@ -4552,6 +4566,17 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
 
   '@tanstack/table-core@8.21.2': {}
+
+  '@tolgee/core@6.2.4': {}
+
+  '@tolgee/react@6.2.4(react@19.1.0)':
+    dependencies:
+      '@tolgee/web': 6.2.4
+      react: 19.1.0
+
+  '@tolgee/web@6.2.4':
+    dependencies:
+      '@tolgee/core': 6.2.4
 
   '@tybys/wasm-util@0.9.0':
     dependencies:

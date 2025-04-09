@@ -26,7 +26,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+
 const defaultImage = "https://avatar.iran.liara.run/public/38";
 
 export function NavUser() {
@@ -87,7 +88,7 @@ export function NavUser() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/admin/account")}>
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
@@ -106,7 +107,7 @@ export function NavUser() {
                 authClient.signOut({
                   fetchOptions: {
                     onSuccess: () => {
-                      router.push("/sign-in");
+                      router.push("/login");
                     },
                   },
                 })

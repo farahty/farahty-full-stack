@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getDirection, routing } from "@/i18n/routing";
 import "../globals.css";
 import AuthProvider from "@/components/auth-provider";
 import { notFound } from "next/navigation";
+import { getTolgee } from "@/i18n/toglee/server";
+import { TolgeeNextProvider } from "@/i18n/toglee/client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +38,9 @@ export default async function RootLayout({
     notFound();
   }
 
+  const tolgee = await getTolgee();
+  const records = await tolgee.loadRequired();
+
   return (
     <html lang={locale} dir={getDirection(locale)} suppressHydrationWarning>
       <body
@@ -48,7 +53,9 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+            <TolgeeNextProvider language={locale} staticData={records}>
+              <NextIntlClientProvider>{children}</NextIntlClientProvider>
+            </TolgeeNextProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

@@ -37,6 +37,8 @@ export const authRoutes = getPathnameRegex([
   "/rest-password",
 ]);
 
+export const defaultRoute = "/";
+
 export function isRTL(locale: string) {
   return locale === "ar";
 }
