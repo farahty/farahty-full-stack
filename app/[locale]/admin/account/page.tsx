@@ -12,7 +12,13 @@ import {
 
 export default function MyAccountPage() {
   return (
-    <AdminContainer className="px-4 gap-6">
+    <AdminContainer
+      className="px-4 gap-6"
+      breadcrumb={[
+        { label: "Dashboard", href: "/admin" },
+        { label: "Account" },
+      ]}
+    >
       <Card>
         <CardHeader>
           <CardTitle>Edit Profile</CardTitle>

@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "./mode-toggle";
 import { Separator } from "./ui/separator";
 import { SidebarInset, SidebarTrigger } from "./ui/sidebar";
+import { AppBreadcrumb } from "./app-breadcrum";
 
 export function AdminContainer({
   children,
@@ -9,7 +10,7 @@ export function AdminContainer({
   breadcrumb,
   ...props
 }: React.ComponentProps<typeof SidebarInset> & {
-  breadcrumb?: React.ReactNode;
+  breadcrumb?: { label: string; href?: string }[];
 }) {
   return (
     <SidebarInset {...props}>
@@ -20,7 +21,7 @@ export function AdminContainer({
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           />
-          {breadcrumb}
+          {breadcrumb && <AppBreadcrumb items={breadcrumb} />}
         </div>
 
         <ModeToggle />

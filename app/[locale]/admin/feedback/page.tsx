@@ -52,9 +52,15 @@ export default function FeedbackPage() {
   };
 
   return (
-    <AdminContainer className="px-6">
-      <h1 className="text-2xl font-bold mb-4 text-center">Feedback</h1>
-      <p className="mb-6 text-center text-muted-foreground">
+    <AdminContainer
+      className="px-6"
+      breadcrumb={[
+        { label: "Dashboard", href: "/admin" },
+        { label: "Feedback" },
+      ]}
+    >
+      <h1 className="text-2xl font-bold mb-4">Feedback</h1>
+      <p className="mb-6 text-muted-foreground">
         We value your feedback! Please fill out the form below to share your
         thoughts, suggestions, or concerns with us.
       </p>
