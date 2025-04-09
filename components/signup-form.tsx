@@ -18,7 +18,8 @@ import { authClient } from "@/lib/auth/auth-client";
 import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { AlertCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { defaultRoute } from "@/i18n/routing";
 
 const signupSchema = z
   .object({
@@ -43,6 +44,7 @@ export function SignupForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const form = useForm<SignupForm>({
     resolver: zodResolver(signupSchema),
@@ -70,7 +72,7 @@ export function SignupForm({
       }
 
       if (results.data?.token) {
-        router.push("/admin");
+        router.push(searchParams.get("callbackURL") ?? defaultRoute);
       }
     } catch (error) {
       setError("An error occurred while signing up.");

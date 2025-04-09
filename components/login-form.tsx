@@ -19,6 +19,8 @@ import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
+import { defaultRoute } from "@/i18n/routing";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -35,6 +37,7 @@ export function LoginForm({
   const [loadingGithub, setLoadingGithub] = useState(false);
   const [loadingGoogle, setLoadingGoogle] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -51,7 +54,7 @@ export function LoginForm({
         {
           email: data.email,
           password: data.password,
-          callbackURL: "/admin",
+          callbackURL: searchParams.get("callbackURL") ?? defaultRoute,
         },
         fetchCallback(setLoading)
       );

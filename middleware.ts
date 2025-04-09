@@ -51,7 +51,7 @@ export async function middleware(request: NextRequest) {
 
   if (!isAuth && !isPublicRoute && !isAuthRoute) {
     return NextResponse.redirect(
-      new URL(`/${locale}/login?callbackUrl=${pathname}`, request.url)
+      new URL(`/${locale}/login?callbackURL=${pathname}`, request.url)
     );
   }
 
