@@ -51,17 +51,18 @@ export function LoginForm({
   const onSubmit = async (data: LoginSchema) => {
     try {
       setError(null);
-      const token = await generateCaptcha();
+      // const token = await generateCaptcha();
       const results = await authClient.signIn.email(
         {
           email: data.email,
           password: data.password,
           callbackURL: searchParams.get("callbackURL") ?? defaultRoute,
-          fetchOptions: {
-            headers: {
-              "x-captcha-response": token,
-            },
-          },
+          // fetchOptions: {
+
+          //   // headers: {
+          //   //   "x-captcha-response": token,
+          //   // },
+          // },
         },
         fetchCallback(setLoading)
       );
