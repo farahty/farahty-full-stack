@@ -21,7 +21,6 @@ import { AlertCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { defaultRoute } from "@/i18n/routing";
-import { generateCaptcha } from "@/lib/captcha";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -51,18 +50,11 @@ export function LoginForm({
   const onSubmit = async (data: LoginSchema) => {
     try {
       setError(null);
-      // const token = await generateCaptcha();
       const results = await authClient.signIn.email(
         {
           email: data.email,
           password: data.password,
           callbackURL: searchParams.get("callbackURL") ?? defaultRoute,
-          // fetchOptions: {
-
-          //   // headers: {
-          //   //   "x-captcha-response": token,
-          //   // },
-          // },
         },
         fetchCallback(setLoading)
       );
@@ -98,16 +90,10 @@ export function LoginForm({
                       e.preventDefault();
                       e.stopPropagation();
                       setLoadingGithub(true);
-                      const token = await generateCaptcha();
                       authClient.signIn.social({
                         provider: "github",
                         callbackURL:
                           searchParams.get("callbackURL") ?? defaultRoute,
-                        fetchOptions: {
-                          headers: {
-                            "x-captcha-response": token,
-                          },
-                        },
                       });
                     }}
                   >
@@ -130,16 +116,10 @@ export function LoginForm({
                       e.preventDefault();
                       e.stopPropagation();
                       setLoadingGoogle(true);
-                      const token = await generateCaptcha();
                       authClient.signIn.social({
                         provider: "google",
                         callbackURL:
                           searchParams.get("callbackURL") ?? defaultRoute,
-                        fetchOptions: {
-                          headers: {
-                            "x-captcha-response": token,
-                          },
-                        },
                       });
                     }}
                   >
