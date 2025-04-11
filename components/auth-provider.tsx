@@ -2,7 +2,6 @@
 
 import { auth } from "@/lib/auth";
 import { authClient } from "@/lib/auth/auth-client";
-import { generateCaptcha } from "@/lib/captcha";
 import React, { useEffect } from "react";
 
 const AuthContext = React.createContext<typeof auth.$Infer.Session | null>(
@@ -22,15 +21,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!session.data && !session.isPending) {
-      generateCaptcha().then((token) => {
-        authClient.signIn.anonymous({
-          fetchOptions: {
-            headers: {
-              "x-captcha-response": token,
-            },
-          },
-        });
-      });
+      authClient.signIn.anonymous();
     }
   }, [session.data, session.isPending]);
 

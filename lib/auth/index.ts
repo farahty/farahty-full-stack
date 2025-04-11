@@ -1,10 +1,17 @@
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
-import { anonymous, admin } from "better-auth/plugins";
+import {
+  anonymous,
+  admin,
+  phoneNumber,
+  apiKey,
+  organization,
+} from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import db from "../db";
 import * as schema from "../db/schema";
 import { sendVerificationEmail } from "../email";
+import { ac, adminRole, userRole, customRole } from "./permissions";
 
 export const auth = betterAuth({
   appName: process.env.APP_NAME!,
@@ -15,7 +22,33 @@ export const auth = betterAuth({
     provider: "pg",
     schema,
   }),
-  plugins: [nextCookies(), anonymous(), admin()],
+  plugins: [
+    nextCookies(),
+    anonymous(),
+    organization(),
+    apiKey(),
+    admin({
+      ac,
+      roles: {
+        admin: adminRole,
+        user: userRole,
+        custom: customRole,
+      },
+    }),
+    phoneNumber({
+      sendOTP: async ({ phoneNumber, code }) => {
+        console.log(`Sending OTP ${code} to phone number ${phoneNumber}`);
+      },
+      signUpOnVerification: {
+        getTempEmail: (phoneNumber) => {
+          return `${phoneNumber}@my-site.com`;
+        },
+        getTempName: (phoneNumber) => {
+          return phoneNumber;
+        },
+      },
+    }),
+  ],
   emailAndPassword: {
     enabled: true,
   },
