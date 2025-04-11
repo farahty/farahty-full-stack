@@ -6,13 +6,13 @@
   "delete": "حذف",
   "deselect": "إلغاء الاختيار",
   "edit": "تعديل",
-  "greeting": "مرحبا {{name}}",
+  "freeze": "Goal",
+  "greeting": "مرحبا {name}",
   "no": "لا",
   "ok": "حسنا",
   "save": "حفظ",
   "search": "بحث",
   "select": "اختيار",
   "update": "تحديث",
-  "yes": "نعم",
-  "freeze": "تجميد"
+  "yes": "نعم"
 }

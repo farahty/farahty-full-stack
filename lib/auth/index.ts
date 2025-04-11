@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
-import { anonymous, admin } from "better-auth/plugins";
+import { anonymous, admin, captcha } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import db from "../db";
 import * as schema from "../db/schema";
@@ -15,7 +15,15 @@ export const auth = betterAuth({
     provider: "pg",
     schema,
   }),
-  plugins: [nextCookies(), anonymous(), admin()],
+  plugins: [
+    nextCookies(),
+    anonymous(),
+    admin(),
+    captcha({
+      provider: "google-recaptcha",
+      secretKey: process.env.GOOGLE_API_KEY!,
+    }),
+  ],
   emailAndPassword: {
     enabled: true,
   },

@@ -19,6 +19,7 @@ export default function Home() {
           and a custom font. You can customize the styles and content as needed.
         </p>
         <p>{t("freeze")}</p>
+        <p>{t("app_version")}</p>
       </main>
     </div>
   );

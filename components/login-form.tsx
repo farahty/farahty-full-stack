@@ -21,6 +21,7 @@ import { AlertCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { defaultRoute } from "@/i18n/routing";
+import { generateCaptcha } from "@/lib/captcha";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -50,11 +51,17 @@ export function LoginForm({
   const onSubmit = async (data: LoginSchema) => {
     try {
       setError(null);
+      const token = await generateCaptcha();
       const results = await authClient.signIn.email(
         {
           email: data.email,
           password: data.password,
           callbackURL: searchParams.get("callbackURL") ?? defaultRoute,
+          fetchOptions: {
+            headers: {
+              "x-captcha-response": token,
+            },
+          },
         },
         fetchCallback(setLoading)
       );
@@ -86,13 +93,20 @@ export function LoginForm({
                     className="w-full"
                     loading={loadingGithub}
                     disabled={loadingGoogle || loading || loadingGithub}
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       setLoadingGithub(true);
+                      const token = await generateCaptcha();
                       authClient.signIn.social({
                         provider: "github",
-                        callbackURL: "/admin",
+                        callbackURL:
+                          searchParams.get("callbackURL") ?? defaultRoute,
+                        fetchOptions: {
+                          headers: {
+                            "x-captcha-response": token,
+                          },
+                        },
                       });
                     }}
                   >
@@ -111,13 +125,20 @@ export function LoginForm({
                     className="w-full"
                     loading={loadingGoogle}
                     disabled={loadingGoogle || loading || loadingGithub}
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       setLoadingGoogle(true);
+                      const token = await generateCaptcha();
                       authClient.signIn.social({
                         provider: "google",
-                        callbackURL: "/admin",
+                        callbackURL:
+                          searchParams.get("callbackURL") ?? defaultRoute,
+                        fetchOptions: {
+                          headers: {
+                            "x-captcha-response": token,
+                          },
+                        },
                       });
                     }}
                   >
@@ -143,6 +164,7 @@ export function LoginForm({
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
+
                   <TextField
                     control={form.control}
                     name="email"

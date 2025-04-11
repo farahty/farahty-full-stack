@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.tolgee.io/cli-schema.json",
+  "projectId": 3,
+  "format": "JSON_TOLGEE",
+  "patterns": [
+    "./app/**/*.ts?(x)"
+  ],
+  "push": {
+    "filesTemplate": "./messages/{languageTag}.json",
+    "language": [
+      "en",
+      "ar"
+    ]
+  },
+  "pull": {
+    "path": "./messages"
+  },
+  "apiUrl": "https://translate.farahty.com",
+  "apiKey": "tgpak_gnpwc5rsoyyxk4lcha4gs5brnfqwimzumjvwg3rsnj3di"
+}
