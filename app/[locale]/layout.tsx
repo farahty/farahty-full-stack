@@ -9,7 +9,6 @@ import AuthProvider from "@/components/auth-provider";
 import { notFound } from "next/navigation";
 import { getTolgee } from "@/i18n/toglee/server";
 import { TolgeeNextProvider } from "@/i18n/toglee/client";
-import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,10 +49,10 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={getDirection(locale)} suppressHydrationWarning>
       <head>
-        <Script
+        {/* <Script
           strategy="beforeInteractive"
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-        ></Script>
+        ></Script> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
