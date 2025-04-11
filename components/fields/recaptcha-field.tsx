@@ -5,8 +5,6 @@ import { FormField } from "../ui/form";
 
 import React from "react";
 
-import ReCaptchaProvider from "./recaptcha-provider";
-
 export type ReCaptchaButton = {
   onChange: (token: string) => void;
   value: string;
@@ -30,21 +28,19 @@ const ReCaptchaField = <
   action?: string;
 }) => {
   return (
-    <ReCaptchaProvider>
-      <FormField
-        control={control}
-        name={name}
-        render={({ field }) => (
-          <input
-            type="hidden"
-            {...field}
-            disabled={disabled}
-            value={field.value}
-          />
-        )}
-        {...props}
-      />
-    </ReCaptchaProvider>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <input
+          type="hidden"
+          {...field}
+          disabled={disabled}
+          value={field.value}
+        />
+      )}
+      {...props}
+    />
   );
 };
 
