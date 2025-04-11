@@ -9,14 +9,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { Form } from "./ui/form";
-import TextField from "./fields/text-field";
+import { Form } from "@/components/ui/form";
+import TextField from "@/components/fields/text-field";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { authClient } from "@/lib/auth/auth-client";
 import { useState } from "react";
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { defaultRoute } from "@/i18n/routing";

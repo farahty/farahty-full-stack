@@ -1,9 +1,9 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "./mode-toggle";
-import { Separator } from "./ui/separator";
-import { SidebarInset, SidebarTrigger } from "./ui/sidebar";
-import { AppBreadcrumb } from "./app-breadcrum";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Separator } from "@/components/ui/separator";
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppBreadcrumb } from "./app-breadcrumb";
 
 export function AdminContainer({
   children,

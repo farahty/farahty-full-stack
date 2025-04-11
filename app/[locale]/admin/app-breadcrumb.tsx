@@ -6,9 +6,10 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "./ui/breadcrumb";
+} from "@/components/ui/breadcrumb";
 import { useLocale } from "next-intl";
 import { isRTL } from "@/i18n/routing";
+import { Fragment } from "react";
 
 type AppBreadcrumbProps = {
   items: Array<{
@@ -26,7 +27,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
     <Breadcrumb>
       <BreadcrumbList>
         {roots.map((item, index) => (
-          <>
+          <Fragment key={index}>
             <BreadcrumbItem key={index} className="hidden md:block">
               <BreadcrumbLink href={item.href ?? "#"}>
                 {item.label}
@@ -35,7 +36,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
             <BreadcrumbSeparator
               className={cn("hidden md:block", { "rotate-180": isRTL(locale) })}
             />
-          </>
+          </Fragment>
         ))}
         <BreadcrumbItem>
           <BreadcrumbPage>{last.label}</BreadcrumbPage>

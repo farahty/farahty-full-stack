@@ -1,9 +1,9 @@
-import { DataTable } from "@/components/data-table";
-import { SectionCards } from "@/components/section-cards";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/app/[locale]/admin/data-table";
+import { SectionCards } from "@/app/[locale]/admin/section-cards";
+import { ChartAreaInteractive } from "@/app/[locale]/admin/chart-area-interactive";
 
 import data from "./data.json";
-import { AdminContainer } from "@/components/admin-container";
+import { AdminContainer } from "@/app/[locale]/admin/admin-container";
 
 export default function Page() {
   return (

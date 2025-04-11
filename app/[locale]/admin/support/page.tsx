@@ -1,5 +1,5 @@
 "use client";
-import { AdminContainer } from "@/components/admin-container";
+import { AdminContainer } from "@/app/[locale]/admin/admin-container";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";

@@ -1,4 +1,4 @@
-import { AdminContainer } from "@/components/admin-container";
+import { AdminContainer } from "@/app/[locale]/admin/admin-container";
 import { Button } from "@/components/ui/button";
 import {
   Card,

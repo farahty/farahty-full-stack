@@ -12,11 +12,11 @@ import { authClient } from "@/lib/auth/auth-client";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "./ui/form";
-import TextField from "./fields/text-field";
+import { Form } from "@/components/ui/form";
+import TextField from "@/components/fields/text-field";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
