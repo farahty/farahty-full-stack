@@ -1,14 +1,6 @@
 import { AdminContainer } from "@/app/[locale]/admin/admin-container";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { EditAccount } from "./edit-acccount";
+import { ChangePassword } from "./change-password";
 
 export default function MyAccountPage() {
   return (
@@ -19,47 +11,9 @@ export default function MyAccountPage() {
         { label: "Account" },
       ]}
     >
-      <Card>
-        <CardHeader>
-          <CardTitle>Edit Profile</CardTitle>
-          <CardDescription>
-            Update your profile information to keep it up to date.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Form to edit profile information goes here.</p>
-          {/* Add your form components here */}
-          <form></form>
-        </CardContent>
-        <CardFooter>
-          <CardAction>
-            <Button type="submit" className="btn btn-primary">
-              Save Changes
-            </Button>
-          </CardAction>
-        </CardFooter>
-      </Card>
+      <EditAccount />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Change Password</CardTitle>
-          <CardDescription>
-            Update your password to keep your account secure.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Form to edit profile information goes here.</p>
-          {/* Add your form components here */}
-          <form></form>
-        </CardContent>
-        <CardFooter>
-          <CardAction>
-            <Button type="submit" className="btn btn-primary">
-              Change Password
-            </Button>
-          </CardAction>
-        </CardFooter>
-      </Card>
+      <ChangePassword />
     </AdminContainer>
   );
 }

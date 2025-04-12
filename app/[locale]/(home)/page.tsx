@@ -1,26 +1,31 @@
-"use client";
-import { useTranslate } from "@tolgee/react";
+import { FileUploader } from "@/components/file-uploader";
+
 export default function Home() {
-  const { t } = useTranslate();
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center">
-        {t("add")}
-        <h1 className="text-4xl font-bold text-center">
-          {t("greeting", { name: process.env.NEXT_PUBLIC_SITE_NAME })}
-          Welcome to{" "}
-          <span className="text-green-500">
-            {process.env.NEXT_PUBLIC_SITE_NAME}
-          </span>
-          App
-        </h1>
-        <p className="text-lg text-center sm:text-left">
-          This is a simple example of a Next.js application using Tailwind CSS
-          and a custom font. You can customize the styles and content as needed.
+    <main className="flex flex-col items-center p-6">
+      <div className="w-4xl">
+        <FileUploader />
+      </div>
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <h1 className="text-2xl font-bold">Welcome to the File Uploader</h1>
+        <p className="text-muted-foreground">
+          Drag and drop files to upload or click to select files.
         </p>
-        <p>{t("freeze")}</p>
-        <p>{t("app_version")}</p>
-      </main>
-    </div>
+        <p className="text-muted-foreground">
+          Supported formats: <strong>PNG, JPG, GIF</strong>
+        </p>
+        <p className="text-muted-foreground">
+          Max file size: <strong>10MB</strong>
+        </p>
+        <p className="text-muted-foreground">
+          <strong>Note:</strong> This is a demo application. Uploaded files are
+          not stored permanently.
+        </p>
+        <p className="text-muted-foreground">
+          <strong>Warning:</strong> This is a demo application. Uploaded files
+          are not stored permanently.
+        </p>
+      </div>
+    </main>
   );
 }

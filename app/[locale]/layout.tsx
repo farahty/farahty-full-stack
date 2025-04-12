@@ -9,6 +9,7 @@ import AuthProvider from "@/components/auth-provider";
 import { notFound } from "next/navigation";
 import { getTolgee } from "@/i18n/toglee/server";
 import { TolgeeNextProvider } from "@/i18n/toglee/client";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,7 @@ export default async function RootLayout({
               <NextIntlClientProvider>{children}</NextIntlClientProvider>
             </TolgeeNextProvider>
           </AuthProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
