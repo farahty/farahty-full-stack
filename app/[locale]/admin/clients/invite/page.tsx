@@ -1,8 +1,9 @@
-import { AdminContainer } from "../admin-container";
+import { AdminContainer } from "../../admin-container";
 
-export default function OrganizationPage() {
+export default function InviteOrganizationPage() {
   return (
     <AdminContainer
+      className="px-6"
       breadcrumb={[
         {
           label: "Admin",
@@ -11,6 +12,10 @@ export default function OrganizationPage() {
         {
           label: "Organization",
           href: "/admin/organization",
+        },
+        {
+          label: "Invite",
+          href: "/admin/organization/invite",
         },
       ]}
     >

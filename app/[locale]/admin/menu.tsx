@@ -10,22 +10,22 @@ import {
 export const menu = {
   navMain: [
     {
-      title: "Organization",
-      url: "/admin/organization",
+      title: "Clients",
+      url: "/admin/clients",
       icon: Building,
       isActive: true,
       items: [
         {
           title: "List",
-          url: "/admin/organization",
+          url: "/admin/clients",
         },
         {
           title: "Archived ",
-          url: "/admin/organization/archived",
+          url: "/admin/clients/archived",
         },
         {
           title: "Invite",
-          url: "/admin/organization/invite",
+          url: "/admin/clients/invite",
         },
       ],
     },

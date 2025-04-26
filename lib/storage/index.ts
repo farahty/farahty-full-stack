@@ -29,7 +29,10 @@ export const uploadFile = async (file: File) => {
   const totalSize = buffer.length;
 
   // Upload the file to Minio
-  await storage.putObject(bucketName, fileName, buffer, totalSize);
+  await storage.putObject(bucketName, fileName, buffer, totalSize, {
+    "Content-Type": file.type,
+    "x-amz-meta-processed": "false",
+  });
 
   return fileName;
 };
